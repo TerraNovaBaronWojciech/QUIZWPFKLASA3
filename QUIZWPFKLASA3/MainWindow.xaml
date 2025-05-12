@@ -6,12 +6,11 @@
         xmlns:local="clr-namespace:QUIZWPFKLASA3"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="587*"/>
-            <ColumnDefinition Width="213*"/>
-        </Grid.ColumnDefinitions>
-
-    </Grid>
+    <StackPanel Margin="10">
+        <TextBlock x:Name="QuestionText" FontWeight="Bold" FontSize="16" TextWrapping="Wrap"/>
+        <ListBox x:Name="AnswerList" Margin="1" SelectionMode="Single"/>
+        <Button Content="Sprawdź" Click="CheckAnswer_Click" Margin="0,10"/>
+        <Button Content="Kolejne pytanie" Click="NextAnswer_Click" Margin="0,10"/>
+        <TextBlock x:Name="ResultText" FontWeight="Bold" Foreground="Green"/>
+    </StackPanel>
 </Window>
