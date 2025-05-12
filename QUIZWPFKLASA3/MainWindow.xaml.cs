@@ -20,6 +20,9 @@ namespace QUIZWPFKLASA3
     public partial class MainWindow : Window
     {
         private List<Quiz> quizList;
+        private int currentIndex = 0;
+        private int score = 0;
+        private bool answerChecked = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -38,7 +41,18 @@ namespace QUIZWPFKLASA3
 
         private void ShowQuestion()
         {
-          //tutaj ma być logika odpowiadająca za wyświetlanie pytania
+            if (currentIndex >= quizList.Count)
+            {
+                QuestionText.Text = $"Koniec! Twój wynik: {score} / {quizList.Count}";
+                AnswerList.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            var q = quizList[currentIndex];
+            QuestionText.Text = q.Pytanie;
+            AnswerList.ItemsSource = q.Odpowiedzi.Select(kv => $"{kv.Key}. {kv.Value}");
+            AnswerList.SelectedIndex = -1;
+            ResultText.Text = "";
 
         }
         private void CheckAnswer_Click(object sender, RoutedEventArgs e)
@@ -47,7 +61,12 @@ namespace QUIZWPFKLASA3
         }
         private void NextAnswer_Click(object sender, RoutedEventArgs e)
         {
-            //tutaj ma być logika, przenosi do kolejnego pytania
+            if (answerChecked)
+            {
+                answerChecked = false;
+                currentIndex++;
+                ShowQuestion();
+            }
         }
     }
 }
